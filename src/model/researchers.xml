@@ -1,0 +1,55 @@
+<researchers>
+	<researcher>
+		<researcher_name>Tuğkan Tuğlular</researcher_name>
+		<password>password123</password>
+		<following_researcher_names>
+			<name>Jane Doe</name>
+		</following_researcher_names>
+		<follower_researcher_names>
+			<name>Dilek Öztürk</name>
+		</follower_researcher_names>
+	</researcher>
+	<researcher>
+		<researcher_name>Dilek Öztürk</researcher_name>
+		<password>password123</password>
+		<following_researcher_names>
+			<name>Tuğkan Tuğlular</name>
+		</following_researcher_names>
+		<follower_researcher_names>
+			<name>Çağdaş Olam</name>
+			<name>Can Yakar</name>
+		</follower_researcher_names>
+	</researcher>
+	<researcher>
+		<researcher_name>Serhat Caner</researcher_name>
+		<password>password123</password>
+		<following_researcher_names>
+			<name>Tuğkan Tuğlular</name>
+			<name>Dilek Öztürk</name>
+		</following_researcher_names>
+	</researcher>
+	<researcher>
+		<researcher_name>Çağdaş Olam</researcher_name>
+		<password>password123</password>
+		<following_researcher_names>
+			<name>Tuğkan Tuğlular</name>
+			<name>Dilek Öztürk</name>
+			<name>Can Yakar</name>
+		</following_researcher_names>
+		<follower_researcher_names>
+			<name>Can Yakar</name>
+		</follower_researcher_names>
+	</researcher>
+	<researcher>
+		<researcher_name>Can Yakar</researcher_name>
+		<password>password123</password>
+		<following_researcher_names>
+			<name>Tuğkan Tuğlular</name>
+			<name>Dilek Öztürk</name>
+			<name>Çağdaş Olam</name>
+		</following_researcher_names>
+		<follower_researcher_names>
+			<name>Çağdaş Olam</name>
+		</follower_researcher_names>
+	</researcher>
+</researchers>
