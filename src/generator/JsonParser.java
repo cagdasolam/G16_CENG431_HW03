@@ -2,15 +2,11 @@ package generator;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import model.ReadingList;
-import model.Researcher;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,52 +29,22 @@ public class JsonParser {
 		}
 	}
 
-	public boolean createNewReadingList(Researcher researcher, String readingListName) {
-		File jsonFile = new File("readingList.json");
+	public boolean updateJsonFile(File jsonFile, List<ReadingList> readingLists) {
+		try {
+			// Write the updated existingReadingLists back to the JSON file
+			Gson gson = new GsonBuilder().setPrettyPrinting().create();
+			FileWriter writer = new FileWriter(jsonFile);
+			gson.toJson(readingLists, writer);
+			writer.close();
 
-		List<ReadingList> existingReadingLists = readExistingReadingLists(jsonFile);
+			System.out.println("JSON file updated successfully!");
 
-		int id = existingReadingLists.stream().mapToInt(ReadingList::getReadingListId).max().orElse(0) + 1;
-
-		if (!isNameUnique(readingListName, existingReadingLists)) {
+			return true;
+		} catch (IOException e) {
+			e.printStackTrace();
 			return false;
 		}
-
-		ReadingList createdReadingList = new ReadingList(id, researcher.getName(), readingListName, 0, new ArrayList<>());
-
-		existingReadingLists.add(createdReadingList);
-
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		String jsonContent = gson.toJson(existingReadingLists);
-
-		try (FileWriter writer = new FileWriter(jsonFile)) {
-			writer.write(jsonContent);
-		} catch (IOException e) {
-			throw new RuntimeException("Failed to write JSON file", e);
-		}
-
-		return true;
 	}
 
-//	TODO: add paper to list
-
-	private List<ReadingList> readExistingReadingLists(File jsonFile) {
-		List<ReadingList> existingReadingLists = new ArrayList<>();
-
-		try (FileReader reader = new FileReader(jsonFile)) {
-			Type listType = new TypeToken<List<ReadingList>>() {}.getType();
-			Gson gson = new Gson();
-			existingReadingLists = gson.fromJson(reader, listType);
-		} catch (IOException e) {
-			System.out.println("Existing JSON file not found. Creating a new one.");
-		}
-
-		return existingReadingLists;
-	}
-
-	private boolean isNameUnique(String newListName, List<ReadingList> readingLists) {
-		return readingLists.stream()
-				.noneMatch(readingList -> readingList.getReadingListName().equals(newListName));
-	}
 
 }

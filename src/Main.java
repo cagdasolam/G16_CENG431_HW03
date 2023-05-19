@@ -1,10 +1,9 @@
+import controller.ReadingListController;
 import generator.CsvGenerator;
 import generator.JsonParser;
 import generator.PaperGenerator;
 import model.Paper;
-import model.ReadingList;
 import model.Researcher;
-import parser.BibFileParser;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,9 +25,15 @@ public class Main {
 
 		jsonParser.createJsonFile();
 
+		File jsonFile = new File("readingList.json");
+
 		Researcher researcher = new Researcher("researcher","password", new ArrayList<>(), new ArrayList<>());
 
-		System.out.println(jsonParser.createNewReadingList(researcher, "ReadingList"));
+		ReadingListController readingListController = new ReadingListController();
+
+		System.out.println(readingListController.createNewReadingList(researcher, "ReadingList3"));
+
+		System.out.println(readingListController.addPaperToReadingList("ReadingList", "newPaper5"));
 
 
 	}
