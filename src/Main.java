@@ -1,6 +1,8 @@
+import controller.PaperController;
 import controller.ReadingListController;
 import generator.CsvGenerator;
-import generator.JsonParser;
+import model.Article;
+import parser.JsonParser;
 import generator.PaperGenerator;
 import model.Paper;
 import model.Researcher;
@@ -19,9 +21,7 @@ public class Main {
 
 		JsonParser jsonParser = new JsonParser();
 
-		List<Paper> papers = paperGenerator.getPapersFromBibFiles();
-
-		csvGenerator.generatePaperCsv(papers);
+		List<Paper> papers = paperGenerator.getPapersFromCsv();
 
 		jsonParser.createJsonFile();
 
@@ -31,9 +31,16 @@ public class Main {
 
 		ReadingListController readingListController = new ReadingListController();
 
+		PaperController paperController = new PaperController();
+
 		System.out.println(readingListController.createNewReadingList(researcher, "ReadingList3"));
 
 		System.out.println(readingListController.addPaperToReadingList("ReadingList", "newPaper5"));
+
+		paperController.downloadPaper(papers.get(0));
+		paperController.downloadPaper(papers.get(14));
+
+
 
 
 	}

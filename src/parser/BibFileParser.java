@@ -1,96 +1,90 @@
 package parser;
+
+import generator.RandomNumberGenerator;
 import model.Article;
 import model.ConferencePaper;
 import model.Paper;
+import org.jbibtex.BibTeXDatabase;
+import org.jbibtex.BibTeXEntry;
+import org.jbibtex.BibTeXParser;
+import org.jbibtex.ParseException;
+import org.jbibtex.Value;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-
 import java.util.Arrays;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class BibFileParser {
 
-	public Paper parseBibFile(File bibFile) throws IOException {
-		Paper paper;
-
-
+	public Paper parseBibFile(File bibFile) throws IOException, ParseException {
 		try (BufferedReader reader = new BufferedReader(new FileReader(bibFile))) {
-			String line = reader.readLine();
+			BibTeXParser bibTeXParser = new BibTeXParser();
+			BibTeXDatabase database = bibTeXParser.parse(reader);
 
-			if (line.startsWith("@article")) {
-				paper = new Article();
-			}
-			else if (line.startsWith("@inproceedings")) {
-				paper = new ConferencePaper();
-			}
-			else {
-				paper = new Paper();
-			}
+			for (BibTeXEntry entry : database.getEntries().values()) {
+				String entryType = entry.getType().getValue();
 
-			List<String> authors = null;
-			String title = null;
-			int year = 0;
-			String DOI = null;
-			int numDownloads= 0;
-
-			int volume = 0;
-			int number = 0;
-			String journal = null;
-
-			String bookTitle = null;
-
-			while ((line = reader.readLine()) != null) {
-
-				Matcher authorMatcher = Pattern.compile("author\\s*=\\s*\\{(.*)\\},").matcher(line);
-				Matcher titleMatcher = Pattern.compile("title\\s*=\\s*\\{(.*)\\},").matcher(line);
-				Matcher yearMatcher = Pattern.compile("year\\s*=\\s*\\{(.*)\\},").matcher(line);
-				Matcher doiMatcher = Pattern.compile("doi\\s*=\\s*\\{(.*)\\},").matcher(line);
-
-				Matcher booktitleMatcher = Pattern.compile("booktitle\\s*=\\s*\\{(.*)\\},").matcher(line);
-
-				Matcher journalMatcher = Pattern.compile("journal\\s*=\\s*\\{(.*)\\},").matcher(line);
-				Matcher volumeMatcher = Pattern.compile("volume\\s*=\\s*\\{(.*)\\},").matcher(line);
-				Matcher numberMatcher = Pattern.compile("number\\s*=\\s*\\{(.*)\\},").matcher(line);
-
-				if (authorMatcher.find()) {
-					authors = Arrays.asList(authorMatcher.group(1).split(","));
-				} else if (titleMatcher.find()) {
-					title = titleMatcher.group(1);
-				} else if (yearMatcher.find()) {
-					year = Integer.parseInt(yearMatcher.group(1));
-				} else if (doiMatcher.find()) {
-					DOI = doiMatcher.group(1);
-				}else if (booktitleMatcher.find()){
-					bookTitle = booktitleMatcher.group(1);
-				}else if (journalMatcher.find()){
-					journal = journalMatcher.group(1);
-				}else if (volumeMatcher.find()){
-					volume = Integer.parseInt(volumeMatcher.group(1));
-				}else if (numberMatcher.find()){
-					number = Integer.parseInt(numberMatcher.group(1));
+				Paper paper;
+				if (entryType.equals("article")) {
+					paper = new Article();
+				} else if (entryType.equals("inproceedings")) {
+					paper = new ConferencePaper();
+				} else {
+					paper = new Paper();
 				}
-			}
 
-			paper.setAuthors(authors);
-			paper.setTitle(title);
-			paper.setYear(year);
-			paper.setDOI(DOI);
+				Value authorValue = entry.getField(BibTeXEntry.KEY_AUTHOR);
+				if (authorValue != null) {
+					String[] authors = authorValue.toUserString().split(",");
+					paper.setAuthors(Arrays.asList(authors));
+				}
 
-			if (paper instanceof Article){
-				((Article) paper).setJournal(journal);
-				((Article) paper).setNumber(number);
-				((Article) paper).setVolume(volume);
-			}
-			if (paper instanceof ConferencePaper){
-				((ConferencePaper) paper).setBookTitle(bookTitle);
+				Value titleValue = entry.getField(BibTeXEntry.KEY_TITLE);
+				if (titleValue != null) {
+					paper.setTitle(titleValue.toUserString());
+				}
+
+				Value yearValue = entry.getField(BibTeXEntry.KEY_YEAR);
+				if (yearValue != null) {
+					paper.setYear(Integer.parseInt(yearValue.toUserString()));
+				}
+
+				Value doiValue = entry.getField(BibTeXEntry.KEY_DOI);
+				if (doiValue != null) {
+					paper.setDOI(doiValue.toUserString());
+				}
+
+				// Set additional fields based on the paper type (Article or ConferencePaper)
+				if (paper instanceof Article article) {
+					Value journalValue = entry.getField(BibTeXEntry.KEY_JOURNAL);
+					if (journalValue != null) {
+						article.setJournal(journalValue.toUserString());
+					}
+
+					Value numberValue = entry.getField(BibTeXEntry.KEY_NUMBER);
+					if (numberValue != null) {
+						article.setNumber(Integer.parseInt(numberValue.toUserString()));
+					}
+
+					Value volumeValue = entry.getField(BibTeXEntry.KEY_VOLUME);
+					if (volumeValue != null) {
+						article.setVolume(Integer.parseInt(volumeValue.toUserString()));
+					}
+				} else if (paper instanceof ConferencePaper conferencePaper) {
+					Value bookTitleValue = entry.getField(BibTeXEntry.KEY_BOOKTITLE);
+					if (bookTitleValue != null) {
+						conferencePaper.setBookTitle(bookTitleValue.toUserString());
+					}
+				}
+
+				paper.setNumDownloads(RandomNumberGenerator.generateRandomNumber(0, 1500));
+
+				return paper; // Return the first paper found (you can modify this as per your requirement)
 			}
 		}
 
-		return paper;
+		throw new ParseException("No entries found in the BibTeX file.");
 	}
 }

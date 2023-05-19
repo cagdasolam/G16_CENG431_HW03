@@ -11,7 +11,7 @@ import java.util.List;
 
 public class CsvGenerator {
 
-	public void generatePaperCsv(List<Paper> papers) {
+	public static void generatePaperCsv(List<Paper> papers) {
 		File papersCsv = new File("papersCsv.csv");
 
 		if (papersCsv.exists()){
@@ -30,7 +30,7 @@ public class CsvGenerator {
 							.append(";").append(article.getVolume())
 							.append(";").append(article.getNumber())
 							.append(";").append(article.getJournal())
-							.append(";").append(RandomNumberGenerator.generateRandomNumber(0, 1500))
+							.append(";").append(article.getNumDownloads())
 							.append("\n");
 				}
 				if (paper instanceof ConferencePaper conferencePaper) {
@@ -40,7 +40,7 @@ public class CsvGenerator {
 							.append(";").append(conferencePaper.getYear())
 							.append(";").append(conferencePaper.getDOI())
 							.append(";").append(conferencePaper.getBookTitle())
-							.append(";").append(RandomNumberGenerator.generateRandomNumber(0, 1500))
+							.append(";").append(conferencePaper.getNumDownloads())
 							.append("\n");
 				}
 				writer.append(line);

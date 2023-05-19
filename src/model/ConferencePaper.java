@@ -8,8 +8,8 @@ public class ConferencePaper extends Paper{
 
 	public ConferencePaper() {}
 
-	public ConferencePaper(List<String> authors, String title, int year, String DOI, String bookTitle) {
-		super(authors, title, year, DOI);
+	public ConferencePaper(List<String> authors, String title, int year, String DOI, String bookTitle, int numDownloads) {
+		super(authors, title, year, DOI, numDownloads);
 		this.bookTitle = bookTitle;
 	}
 

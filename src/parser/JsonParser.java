@@ -1,4 +1,4 @@
-package generator;
+package parser;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -45,6 +45,5 @@ public class JsonParser {
 			return false;
 		}
 	}
-
 
 }
