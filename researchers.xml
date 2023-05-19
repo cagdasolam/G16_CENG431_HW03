@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><researchers>
+<researchers>
 	<researcher>
 		<researcher_name>Tuğkan Tuğlular</researcher_name>
 		<password>password123</password>
 		<following_researcher_names>
 			<name>Dilek Öztürk</name>
-			
 		</following_researcher_names>
 		<follower_researcher_names>
 			<name>Dilek Öztürk</name>
@@ -41,7 +40,6 @@
 		</following_researcher_names>
 		<follower_researcher_names>
 			<name>Can Yakar</name>
-			
 		</follower_researcher_names>
 	</researcher>
 	<researcher>

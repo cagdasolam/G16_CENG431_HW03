@@ -8,10 +8,10 @@ public class ResearcherController {
 	XmlParser xmlParser = new XmlParser();
 
 	public boolean followResearcher(Researcher follower, Researcher followed){
-		return xmlParser.updateXml(follower, followed);
+		return xmlParser.followResearcher(follower, followed);
 	}
 
 	public boolean unFollowResearcher(Researcher follower, Researcher followed){
-		return xmlParser.unfollowXml(follower, followed);
+		return xmlParser.unfollowResearcher(follower, followed);
 	}
 }
