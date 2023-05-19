@@ -1,6 +1,7 @@
 package parser;
 
 import org.apache.commons.csv.CSVFormat;
+
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
@@ -9,8 +10,59 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import model.Article;
+import model.ConferencePaper;
+import model.Paper;
 
 public class CsvParser {
+	
+	public List<Paper> getPapers(String filePath) {
+	    List<Paper> papers = new ArrayList<>();
+
+	    try {
+	        File csvFile = new File(filePath);
+	        FileReader fileReader = new FileReader(csvFile);
+	        CSVParser parser = CSVFormat.DEFAULT.withDelimiter(';').parse(fileReader);
+
+	        for (CSVRecord record : parser.getRecords()) {
+	            String paperType = record.get(0);
+	            Paper paper;
+
+	            List<String> authors = Arrays.asList(record.get(1).split(","));
+	            String title = record.get(2);
+	            int year = Integer.parseInt(record.get(3));
+	            String DOI = record.get(4);
+	            int numDownloads;
+
+	            if (paperType.equals("Conference paper")) {
+	                String bookTitle = record.get(5);
+	                numDownloads = Integer.parseInt(record.get(6));
+	                paper = new ConferencePaper(authors, title, year, DOI, bookTitle, numDownloads);
+	            } else {
+	                int volume = Integer.parseInt(record.get(5));
+	                int number = Integer.parseInt(record.get(6));
+	                String journal = record.get(7);
+	                numDownloads = Integer.parseInt(record.get(8));
+	                paper = new Article(authors, title, year, DOI, volume, number, journal, numDownloads);
+	            }
+
+	            papers.add(paper);
+	        }
+
+	        parser.close();
+	        fileReader.close();
+
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+
+	    return papers;
+	}
+
 
 	public void updateCSV(String filePath, String paperTitle) {
 		try {
