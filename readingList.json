@@ -1,0 +1,16 @@
+[
+  {
+    "readingListId": 1,
+    "creatorResearcherName": "researcher",
+    "readingListName": "ReadingList",
+    "numberOfPapers": 0,
+    "nameOfPapers": []
+  },
+  {
+    "readingListId": 2,
+    "creatorResearcherName": "researcher",
+    "readingListName": "ReadingList2",
+    "numberOfPapers": 0,
+    "nameOfPapers": []
+  }
+]

@@ -55,7 +55,7 @@ public class BibFileParser {
 
 				Matcher journalMatcher = Pattern.compile("journal\\s*=\\s*\\{(.*)\\},").matcher(line);
 				Matcher volumeMatcher = Pattern.compile("volume\\s*=\\s*\\{(.*)\\},").matcher(line);
-				Matcher numberMatcher = Pattern.compile("number\\s*=\\s*\\{(.*)\\,").matcher(line);
+				Matcher numberMatcher = Pattern.compile("number\\s*=\\s*\\{(.*)\\},").matcher(line);
 
 				if (authorMatcher.find()) {
 					authors = Arrays.asList(authorMatcher.group(1).split(","));

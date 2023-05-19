@@ -10,8 +10,8 @@ public class Article extends Paper{
 
 	public Article() {}
 
-	public Article(List<String> authors, String title, int year, String DOI, int volume, int number, String journal, int numDownloads) {
-		super(authors, title, year, DOI, numDownloads);
+	public Article(List<String> authors, String title, int year, String DOI, int volume, int number, String journal) {
+		super(authors, title, year, DOI);
 		this.volume = volume;
 		this.number = number;
 		this.journal = journal;

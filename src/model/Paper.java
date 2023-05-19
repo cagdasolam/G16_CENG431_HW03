@@ -10,16 +10,16 @@ public class Paper {
 	private String title;
 	private int year;
 	private String DOI;
-	private int numDownloads;
+//	private int numDownloads;
 
 	public Paper(){}
 
-	public Paper(List<String> authors, String title, int year, String DOI, int numDownloads) {
+	public Paper(List<String> authors, String title, int year, String DOI) {
 		this.authors = authors;
 		this.title = title;
 		this.year = year;
 		this.DOI = DOI;
-		this.numDownloads = numDownloads;
+//		this.numDownloads = numDownloads;
 	}
 
 	public List<String> getAuthors() {
@@ -54,11 +54,11 @@ public class Paper {
 		this.DOI = DOI;
 	}
 
-	public int getNumDownloads() {
-		return numDownloads;
-	}
-
-	public void setNumDownloads(int numDownloads) {
-		this.numDownloads = numDownloads;
-	}
+//	public int getNumDownloads() {
+//		return numDownloads;
+//	}
+//
+//	public void setNumDownloads(int numDownloads) {
+//		this.numDownloads = numDownloads;
+//	}
 }
