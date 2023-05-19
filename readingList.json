@@ -3,21 +3,24 @@
     "readingListId": 1,
     "creatorResearcherName": "researcher",
     "readingListName": "ReadingList",
-    "numberOfPapers": 0,
+    "numberOfPapers": 6,
     "nameOfPapers": [
       "newPaper",
       "newPaper2",
       "newPaper3",
       "newPaper4",
-      "newPaper5"
+      "newPaper5",
+      "newPaper6"
     ]
   },
   {
     "readingListId": 2,
     "creatorResearcherName": "researcher",
     "readingListName": "ReadingList2",
-    "numberOfPapers": 0,
-    "nameOfPapers": []
+    "numberOfPapers": 1,
+    "nameOfPapers": [
+      "newPaper1"
+    ]
   },
   {
     "readingListId": 3,

@@ -51,6 +51,7 @@ public class ReadingListController {
 				return false;
 			}
 			updatedReadingList.getNameOfPapers().add(paperName);
+			updatedReadingList.setNumberOfPapers(updatedReadingList.getNameOfPapers().size());
 		} else {
 			System.out.println("ReadingList not found!");
 			return false;
