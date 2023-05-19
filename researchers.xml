@@ -1,12 +1,14 @@
-<researchers>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><researchers>
 	<researcher>
 		<researcher_name>Tuğkan Tuğlular</researcher_name>
 		<password>password123</password>
 		<following_researcher_names>
-			<name>Jane Doe</name>
+			<name>Dilek Öztürk</name>
+			
 		</following_researcher_names>
 		<follower_researcher_names>
 			<name>Dilek Öztürk</name>
+			<name>Serhat Caner</name>
 		</follower_researcher_names>
 	</researcher>
 	<researcher>
@@ -18,6 +20,7 @@
 		<follower_researcher_names>
 			<name>Çağdaş Olam</name>
 			<name>Can Yakar</name>
+			<name>Tuğkan Tuğlular</name>
 		</follower_researcher_names>
 	</researcher>
 	<researcher>
@@ -38,6 +41,7 @@
 		</following_researcher_names>
 		<follower_researcher_names>
 			<name>Can Yakar</name>
+			
 		</follower_researcher_names>
 	</researcher>
 	<researcher>
