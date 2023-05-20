@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class MainFrame extends JFrame {
 	private JButton btnViewProfile;
-	private JButton btnViewReadingLists;
+	private JButton createNewReadingList;
 	private JButton btnViewPapers;
 	private JButton btnViewResearchers;
 
@@ -36,11 +36,11 @@ public class MainFrame extends JFrame {
 		gbc.gridy = 0;
 		gbc.insets = new Insets(10, 10, 10, 10);
 
-		btnViewReadingLists = new JButton("Your Reading Lists");
-		btnViewPapers = new JButton("See Papers");
+		createNewReadingList = new JButton("Create new Reading List");
+		btnViewPapers = new JButton("View Papers");
 		btnViewResearchers = new JButton("View Researchers");
 
-		contentPanel.add(btnViewReadingLists, gbc);
+		contentPanel.add(createNewReadingList, gbc);
 		gbc.gridy++;
 		contentPanel.add(btnViewPapers, gbc);
 		gbc.gridy++;
@@ -66,7 +66,7 @@ public class MainFrame extends JFrame {
 		int buttonWidth = getWidth() / 3 - 30;
 		int buttonHeight = 50;
 
-		btnViewReadingLists.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
+		createNewReadingList.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
 		btnViewPapers.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
 		btnViewResearchers.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
 
@@ -78,8 +78,8 @@ public class MainFrame extends JFrame {
 		return btnViewProfile;
 	}
 
-	public JButton getBtnViewReadingLists() {
-		return btnViewReadingLists;
+	public JButton getCreateNewReadingList() {
+		return createNewReadingList;
 	}
 
 	public JButton getBtnViewPapers() {

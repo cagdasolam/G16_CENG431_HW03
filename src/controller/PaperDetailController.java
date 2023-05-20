@@ -46,9 +46,12 @@ public class PaperDetailController {
 			public void actionPerformed(ActionEvent e) {
 				ReadingList selectedReadingList = (ReadingList) view.getReadingListComboBox().getSelectedItem();
 				if (selectedReadingList != null) {
-					if (!addToReadingList(selectedReadingList, paper)){
-                        JOptionPane.showMessageDialog(view, "Paper already in list");
-                    }
+					if (addToReadingList(selectedReadingList, paper)){
+						JOptionPane.showMessageDialog(view, "this paper added to your reading list: " + selectedReadingList.getReadingListName());
+
+                    }else {
+						JOptionPane.showMessageDialog(view, "Paper already in list");
+					}
 				}
 			}
 		});
@@ -58,6 +61,7 @@ public class PaperDetailController {
 
 	private void downloadPaper(Paper paper) {
 		new PaperController().downloadPaper(paper);
+		JOptionPane.showMessageDialog(view, "paper downloaded!");
 	}
 
 	private boolean addToReadingList(ReadingList readingList, Paper paper) {

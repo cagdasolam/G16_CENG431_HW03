@@ -46,7 +46,6 @@ public class PaperListController {
                 return paper;
             }
         }
-        JOptionPane.showMessageDialog(paperListFrame, "hata");
         return null;
     }
 
