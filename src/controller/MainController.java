@@ -8,6 +8,8 @@ import parser.CsvParser;
 import parser.XmlParser;
 import view.MainFrame;
 
+import java.util.List;
+
 public class MainController {
     private MainFrame mainFrame;
     private Researcher researcher; // the currently logged-in researcher

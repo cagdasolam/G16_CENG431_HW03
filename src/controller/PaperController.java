@@ -3,6 +3,8 @@ package controller;
 import model.Paper;
 import parser.CsvParser;
 
+import java.util.List;
+
 public class PaperController {
 
 	CsvParser csvParser = new CsvParser();
@@ -13,6 +15,9 @@ public class PaperController {
 		paper.setNumDownloads(paper.getNumDownloads() + 1);
 
 		csvParser.updateCSV(papersCsv, paper.getTitle());
+	}
 
+	public List<Paper> getPapers(){
+		return csvParser.getPapers(papersCsv);
 	}
 }
