@@ -4,6 +4,7 @@ import java.awt.Dimension;
 
 import javax.swing.*;
 
+@SuppressWarnings("serial")
 public class LoginFrame extends JFrame {
     private JTextField tfUsername;
     private JPasswordField pfPassword;

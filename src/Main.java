@@ -2,14 +2,13 @@ import controller.MainWindowController;
 import controller.PaperController;
 import controller.ReadingListController;
 import controller.ResearcherController;
-import generator.CsvGenerator;
 import generator.PaperGenerator;
 import model.Paper;
 import model.Researcher;
+import parser.CsvParser;
 import parser.JsonParser;
 import parser.XmlParser;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,17 +18,15 @@ public class Main {
 
 		PaperGenerator paperGenerator = new PaperGenerator();
 
-		CsvGenerator csvGenerator = new CsvGenerator();
-
 		JsonParser jsonParser = new JsonParser();
 
 		XmlParser xmlParser = new XmlParser();
+		
+		CsvParser csvParser = new CsvParser();
 
 		List<Paper> papers = paperGenerator.getPapersFromCsv();
 
 		jsonParser.createJsonFile();
-
-		File jsonFile = new File("readingList.json");
 
 		Researcher researcher = new Researcher("researcher", "password", new ArrayList<>(), new ArrayList<>());
 
@@ -53,14 +50,7 @@ public class Main {
 		System.out.println(researcherController.followResearcher(researchers.get(0), researchers.get(3)));
 		System.out.println(researcherController.unFollowResearcher(researchers.get(0), researchers.get(3)));
 		
-	
-		/*SwingUtilities.invokeLater(() -> {
-	        LoginFrame loginFrame = new LoginFrame();
-	        new LoginController(loginFrame, xmlParser);
-	        loginFrame.setVisible(true);
-	    });*/
-		
-		new MainWindowController();
+		new MainWindowController(csvParser, xmlParser);
 
 	}
 }

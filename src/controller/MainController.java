@@ -1,7 +1,8 @@
 package controller;
 
+import java.util.List;
+
 import model.Researcher;
-import parser.CsvParser;
 import parser.XmlParser;
 import view.MainFrame;
 
@@ -9,34 +10,46 @@ public class MainController {
     private MainFrame mainFrame;
     private Researcher researcher; // the currently logged-in researcher
     private XmlParser xmlParser;
+    private List<Researcher> researchers;
 
     public MainController(Researcher researcher) {
         this.mainFrame = new MainFrame(researcher);
         this.researcher = researcher;
         this.xmlParser = new XmlParser();
-
-        mainFrame.getBtnViewResearcherList().addActionListener(e -> viewResearcherList());
-        mainFrame.getBtnViewPaperList().addActionListener(e -> viewPaperList());
-        mainFrame.getBtnViewProfile().addActionListener(e -> viewProfile());
-        mainFrame.getBtnViewReadingList().addActionListener(e -> viewReadingList());
+        this.researchers = xmlParser.getResearchersFromXml();
+        
+        initController();
 
         mainFrame.setVisible(true);
     }
-
-    private void viewResearcherList() {
-        new ResearcherListController(xmlParser.getResearchersFromXml());
+    
+    private void initController() {
+        mainFrame.getBtnViewProfile().addActionListener(e -> openProfile(researcher));
+        mainFrame.getBtnViewReadingLists().addActionListener(e -> openReadingLists());
+        mainFrame.getBtnViewPapers().addActionListener(e -> openPapers());
+        mainFrame.getBtnViewResearchers().addActionListener(e -> openResearchers());
     }
 
-    private void viewPaperList() {
-        /*new PaperListController(CsvParser.getPapers("papersCsv.csv"));*/
+    private void openProfile(Researcher researcher) {
+    	
+        for (Researcher r : researchers) {
+            if (r.getName().equals(researcher.getName())) {
+                new ResearcherProfileController(r); 
+                break;
+            }
+        }
     }
 
-    private void viewProfile() {
-        new ResearcherProfileController(researcher);
+    private void openReadingLists() {
+        // Open reading list view here
     }
 
-    private void viewReadingList() {
-        /*new ReadingListController(researcher);*/
+    private void openPapers() {
+        // Open papers view here
+    }
+
+    private void openResearchers() {
+        // Open researchers view here
     }
 }
 

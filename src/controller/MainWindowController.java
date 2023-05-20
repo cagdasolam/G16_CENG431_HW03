@@ -7,13 +7,13 @@ import view.MainWindow;
 
 public class MainWindowController {
     private MainWindow mainWindow;
-    private LoginFrame loginFrame;
     private XmlParser xmlParser;
+    private CsvParser csvParser;
 
-    public MainWindowController() {
+    public MainWindowController(CsvParser csvParser, XmlParser xmlParser) {
         this.mainWindow = new MainWindow();
-        this.loginFrame = new LoginFrame();
-        this.xmlParser = new XmlParser();
+        this.xmlParser = xmlParser;
+        this.csvParser = csvParser;
 
         mainWindow.getBtnLogin().addActionListener(e -> openLoginWindow());
         mainWindow.getBtnViewPapers().addActionListener(e -> openPaperList());
@@ -23,12 +23,11 @@ public class MainWindowController {
     }
 
     private void openLoginWindow() {
-        new LoginController(loginFrame, xmlParser);
+        new LoginController();
         mainWindow.dispose(); // close the main window
     }
 
     private void openPaperList() {
-    	CsvParser csvParser = new CsvParser();
         new PaperListController(csvParser.getPapers("papersCsv.csv"));
     }
 
