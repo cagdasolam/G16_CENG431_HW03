@@ -31,10 +31,6 @@ public class MainWindowController {
         mainWindow.dispose(); // close the main window
     }
 
-    private void openPaperList() {
-        new PaperListController(csvParser.getPapers("papersCsv.csv"));
-    }
-
     private void openResearcherList() {
         new ResearcherListController(researcherController.getResearchers());
     }

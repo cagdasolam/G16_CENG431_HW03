@@ -26,8 +26,9 @@ public class LoginController {
                 // Valid credentials, login successful
                 JOptionPane.showMessageDialog(loginFrame, "Login Successful!");
 
+                Researcher researcher = researcherController.getResearcher(enteredUsername);
                 // Launch the MainFrame
-                SwingUtilities.invokeLater(() -> new MainFrame(researcherController.getResearcher(enteredUsername)).setVisible(true));
+                SwingUtilities.invokeLater(() -> new MainController(researcher));
                 loginFrame.dispose();
             }else {
                 // If we reached here, it means the credentials were invalid
