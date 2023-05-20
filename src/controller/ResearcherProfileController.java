@@ -1,15 +1,12 @@
 package controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.List;
-
-import javax.swing.JOptionPane;
-
 import model.ReadingList;
 import model.Researcher;
-import view.ReadingListFrame;
 import view.ResearcherProfileFrame;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ResearcherProfileController {
     private ResearcherProfileFrame researcherProfileFrame;
