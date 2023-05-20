@@ -2,7 +2,9 @@ package controller;
 
 import java.util.List;
 
+import model.Paper;
 import model.Researcher;
+import parser.CsvParser;
 import parser.XmlParser;
 import view.MainFrame;
 
@@ -11,12 +13,14 @@ public class MainController {
     private Researcher researcher; // the currently logged-in researcher
     private XmlParser xmlParser;
     private List<Researcher> researchers;
+    private List<Paper> papers;
 
     public MainController(Researcher researcher) {
         this.mainFrame = new MainFrame(researcher);
         this.researcher = researcher;
         this.xmlParser = new XmlParser();
         this.researchers = xmlParser.getResearchersFromXml();
+        this.papers = new CsvParser().getPapers("papersCsv.csv");
         
         initController();
 
@@ -45,7 +49,7 @@ public class MainController {
     }
 
     private void openPapers() {
-        // Open papers view here
+        new PaperListController(papers, researcher);
     }
 
     private void openResearchers() {
