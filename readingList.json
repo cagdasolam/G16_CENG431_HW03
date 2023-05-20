@@ -37,7 +37,8 @@
     "readingListName": "ReadingList3",
     "numberOfPapers": 1,
     "nameOfPapers": [
-      "newPaper"
+      "Test-Driven Modeling for Model-Driven Development",
+      "A Successful Application of a Test-Driven Development Strategy in the Industrial Environment"
     ]
   }
 ]

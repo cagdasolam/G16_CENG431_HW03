@@ -1,5 +1,7 @@
 package model;
 
+import controller.PaperController;
+
 import java.util.List;
 
 public class ReadingList {
@@ -56,5 +58,13 @@ public class ReadingList {
 
 	public void setNameOfPapers(List<String> nameOfPapers) {
 		this.nameOfPapers = nameOfPapers;
+	}
+
+	public List<Paper> getPapers(){
+		PaperController paperController = new PaperController();
+
+		List<Paper> papers = paperController.getPapers();
+
+		return papers.stream().filter(paper -> nameOfPapers.contains(paper.getTitle())).toList();
 	}
 }

@@ -1,33 +1,53 @@
 package view;
 
+import model.Paper;
+import model.ReadingList;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
 public class ReadingListFrame extends JFrame {
-    private DefaultListModel<String> readingListModel;
-    private JList<String> readingList;
+    private DefaultListModel<Paper> paperJlistModel;
+    private JList<Paper> paperJlist;
 
-    public ReadingListFrame() {
+    public ReadingListFrame(ReadingList readingList) {
         super("Reading Lists");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        readingListModel = new DefaultListModel<>();
-        readingList = new JList<>(readingListModel);
+        paperJlistModel = new DefaultListModel<>();
+        paperJlist = new JList<>(paperJlistModel);
+        paperJlist.setCellRenderer(new PaperCellRenderer());
 
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
         add(new JLabel("Reading Lists:"));
-        add(new JScrollPane(readingList));
+
+        List<Paper> paperList = readingList.getPapers();
+        add(new JScrollPane(paperJlist));
 
         pack();
         setLocationRelativeTo(null); // center the frame
     }
 
-    public void setReadingList(List<String> readingLists) {
-        readingListModel.clear();
-        for (String name : readingLists) {
-            readingListModel.addElement(name);
+    public void setReadingList(ReadingList readingList) {
+        paperJlistModel.clear();
+        for (Paper paper : readingList.getPapers()) {
+            paperJlistModel.addElement(paper);
+        }
+    }
+
+    private static class PaperCellRenderer extends DefaultListCellRenderer {
+        @Override
+        public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected,
+                                                      boolean cellHasFocus) {
+            super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+
+            if (value instanceof Paper paper) {
+                setText(paper.getTitle());
+            }
+
+            return this;
         }
     }
 }

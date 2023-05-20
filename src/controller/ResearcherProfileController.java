@@ -1,11 +1,14 @@
 package controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JOptionPane;
 
 import model.ReadingList;
 import model.Researcher;
+import view.ReadingListFrame;
 import view.ResearcherProfileFrame;
 
 public class ResearcherProfileController {
@@ -19,6 +22,12 @@ public class ResearcherProfileController {
         this.readingListController = new ReadingListController();
 
         loadResearcherProfile();
+        researcherProfileFrame.getBtnLookDetails().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showReadingListDetails();
+            }
+        });
         researcherProfileFrame.setVisible(true);
     }
 
@@ -30,8 +39,7 @@ public class ResearcherProfileController {
     }
     
     private void showReadingListDetails() {
-        String selectedReadingListName = researcherProfileFrame.getReadingLists().getSelectedValue();
-        ReadingList selectedReadingList = findReadingList(selectedReadingListName);
+        ReadingList selectedReadingList =  researcherProfileFrame.getReadingLists().getSelectedValue();
 
         if (selectedReadingList != null) {
             new ReadingListFrameController(selectedReadingList);
@@ -39,11 +47,5 @@ public class ResearcherProfileController {
             JOptionPane.showMessageDialog(researcherProfileFrame, "Please select a reading list");
         }
     }
-    
-    private ReadingList findReadingList(String readingListName) {
-    	return readingListController.findByReadingListName(readingListName);
-    }
-
-
 }
 

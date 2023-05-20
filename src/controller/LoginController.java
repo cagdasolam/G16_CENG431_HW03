@@ -10,8 +10,6 @@ import java.util.List;
 
 public class LoginController {
     private LoginFrame loginFrame;
-//    private XmlParser xmlParser;
-
     private ResearcherController researcherController;
 
     public LoginController(LoginFrame loginFrame, ResearcherController researcherController) {
