@@ -20,6 +20,14 @@ public class ReadingListController {
 	File jsonFile ;
 
 
+	public List<ReadingList> getReadingLists() {
+		return readingLists;
+	}
+
+	public void setReadingLists(List<ReadingList> readingLists) {
+		this.readingLists = readingLists;
+	}
+
 	public ReadingListController() {
 		this.jsonFile = new File("readingList.json");
 		this.readingLists = readExistingReadingLists();

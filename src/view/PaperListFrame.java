@@ -7,6 +7,7 @@ import java.util.List;
 public class PaperListFrame extends JFrame {
     private DefaultListModel<String> paperListModel;
     private JList<String> paperList;
+    private JButton btnViewDetails;
 
     public PaperListFrame() {
         super("Paper List");
@@ -14,11 +15,13 @@ public class PaperListFrame extends JFrame {
 
         paperListModel = new DefaultListModel<>();
         paperList = new JList<>(paperListModel);
+        btnViewDetails = new JButton("View Details");
 
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
         add(new JLabel("Papers:"));
         add(new JScrollPane(paperList));
+        add(btnViewDetails);
 
         pack();
         setLocationRelativeTo(null); // center the frame
@@ -30,9 +33,15 @@ public class PaperListFrame extends JFrame {
             paperListModel.addElement(name);
         }
     }
+    
+    public JButton getBtnViewDetails() {
+        return btnViewDetails;
+    }
 
     public JList<String> getPaperList() {
         return paperList;
     }
+    
+    
 }
 

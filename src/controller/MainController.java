@@ -1,48 +1,61 @@
 package controller;
 
+import java.util.List;
+
+import model.Paper;
 import model.Researcher;
+import parser.CsvParser;
+import parser.XmlParser;
 import view.MainFrame;
 
 import java.util.List;
 
 public class MainController {
-	private MainFrame mainFrame;
-	private Researcher researcher; // the currently logged-in researcher
-	private List<Researcher> researchers;
-	private ResearcherController researcherController;
+    private MainFrame mainFrame;
+    private Researcher researcher; // the currently logged-in researcher
+    private XmlParser xmlParser;
+    private List<Researcher> researchers;
+    private List<Paper> papers;
 
-	public MainController(Researcher researcher) {
-		this.mainFrame = new MainFrame(researcher);
-		this.researcher = researcher;
-		this.researcherController = new ResearcherController();
-		this.researchers = researcherController.getResearchers();
+    public MainController(Researcher researcher) {
+        this.mainFrame = new MainFrame(researcher);
+        this.researcher = researcher;
+        this.xmlParser = new XmlParser();
+        this.researchers = xmlParser.getResearchersFromXml();
+        this.papers = new CsvParser().getPapers("papersCsv.csv");
+        
+        initController();
 
-		initController();
+        mainFrame.setVisible(true);
+    }
+    
+    private void initController() {
+        mainFrame.getBtnViewProfile().addActionListener(e -> openProfile(researcher));
+        mainFrame.getBtnViewReadingLists().addActionListener(e -> openReadingLists());
+        mainFrame.getBtnViewPapers().addActionListener(e -> openPapers());
+        mainFrame.getBtnViewResearchers().addActionListener(e -> openResearchers());
+    }
 
-		mainFrame.setVisible(true);
-	}
+    private void openProfile(Researcher researcher) {
+    	
+        for (Researcher r : researchers) {
+            if (r.getName().equals(researcher.getName())) {
+                new ResearcherProfileController(r); 
+                break;
+            }
+        }
+    }
 
-	private void initController() {
-		mainFrame.getBtnViewProfile().addActionListener(e -> openProfile(researcher));
-		mainFrame.getBtnViewReadingLists().addActionListener(e -> openReadingLists());
-		mainFrame.getBtnViewPapers().addActionListener(e -> openPapers());
-		mainFrame.getBtnViewResearchers().addActionListener(e -> openResearchers());
-	}
+    private void openReadingLists() {
+        // Open reading list view here
+    }
 
-	private void openProfile(Researcher researcher) {
-		new ResearcherProfileController(researcher);
-	}
+    private void openPapers() {
+        new PaperListController(papers, researcher);
+    }
 
-	private void openReadingLists() {
-		// Open reading list view here
-	}
-
-	private void openPapers() {
-		// Open papers view here
-	}
-
-	private void openResearchers() {
-		// Open researchers view here
-	}
+    private void openResearchers() {
+        // Open researchers view here
+    }
 }
 
