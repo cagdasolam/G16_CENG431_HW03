@@ -30,5 +30,14 @@
     "nameOfPapers": [
       "newPaper"
     ]
+  },
+  {
+    "readingListId": 4,
+    "creatorResearcherName": "asd",
+    "readingListName": "ReadingList3",
+    "numberOfPapers": 1,
+    "nameOfPapers": [
+      "newPaper"
+    ]
   }
 ]
