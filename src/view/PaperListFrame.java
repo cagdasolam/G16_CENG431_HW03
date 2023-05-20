@@ -17,13 +17,17 @@ public class PaperListFrame extends JFrame {
         paperList = new JList<>(paperListModel);
         btnViewDetails = new JButton("View Details");
 
-        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        JPanel listPanel = new JPanel(new BorderLayout());
 
-        add(new JLabel("Papers:"));
-        add(new JScrollPane(paperList));
-        add(btnViewDetails);
+        listPanel.add(new JLabel("Papers:"), BorderLayout.NORTH);
+        listPanel.add(new JScrollPane(paperList), BorderLayout.CENTER);
 
-        pack();
+        mainPanel.add(listPanel, BorderLayout.CENTER);
+        mainPanel.add(btnViewDetails, BorderLayout.SOUTH);
+
+        setContentPane(mainPanel);
+        setSize(1000, 600);
         setLocationRelativeTo(null); // center the frame
     }
 
@@ -33,7 +37,7 @@ public class PaperListFrame extends JFrame {
             paperListModel.addElement(name);
         }
     }
-    
+
     public JButton getBtnViewDetails() {
         return btnViewDetails;
     }
@@ -41,7 +45,4 @@ public class PaperListFrame extends JFrame {
     public JList<String> getPaperList() {
         return paperList;
     }
-    
-    
 }
-

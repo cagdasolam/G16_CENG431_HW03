@@ -21,7 +21,7 @@ public class ResearcherProfileController {
         this.researcher = researcher;
         this.readingListController = new ReadingListController();
 
-        loadResearcherProfile();
+        loadResearcherProfile(researcher);
         researcherProfileFrame.getBtnLookDetails().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -31,7 +31,7 @@ public class ResearcherProfileController {
         researcherProfileFrame.setVisible(true);
     }
 
-    private void loadResearcherProfile() {
+    private void loadResearcherProfile(Researcher researcher) {
         researcherProfileFrame.setName(researcher.getName());
         researcherProfileFrame.setFollowing(researcher.getFollowingResearcherNames());
         researcherProfileFrame.setFollowers(researcher.getFollowerResearcherNames());
@@ -42,7 +42,7 @@ public class ResearcherProfileController {
         ReadingList selectedReadingList =  researcherProfileFrame.getReadingLists().getSelectedValue();
 
         if (selectedReadingList != null) {
-            new ReadingListFrameController(selectedReadingList);
+            new PaperListController(selectedReadingList.getPapers(), researcher);
         } else {
             JOptionPane.showMessageDialog(researcherProfileFrame, "Please select a reading list");
         }

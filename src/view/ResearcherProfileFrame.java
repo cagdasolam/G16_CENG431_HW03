@@ -2,7 +2,9 @@ package view;
 
 import javax.swing.*;
 
+import controller.ResearcherProfileController;
 import model.ReadingList;
+import model.Researcher;
 
 import java.awt.*;
 import java.util.List;
@@ -25,6 +27,7 @@ public class ResearcherProfileFrame extends JFrame {
     public ResearcherProfileFrame() {
         super("Researcher Profile");
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(true);
 
         lblName = new JLabel();
         followingListModel = new DefaultListModel<>();
@@ -36,12 +39,14 @@ public class ResearcherProfileFrame extends JFrame {
         readingLists.setCellRenderer(new ReadingListRenderer());
 
         btnLookDetails = new JButton("Look Details");
+        btnLookDetails.setPreferredSize(new Dimension(120, btnLookDetails.getPreferredSize().height));
 
         JPanel mainPanel = new JPanel(new BorderLayout());
         JPanel profilePanel = new JPanel();
         profilePanel.setLayout(new BoxLayout(profilePanel, BoxLayout.Y_AXIS));
 
-        profilePanel.add(new JLabel("Researcher Name:"));
+        JLabel nameLabel = new JLabel("Researcher Name:");
+        profilePanel.add(nameLabel);
         profilePanel.add(lblName);
         profilePanel.add(Box.createVerticalStrut(10));
         profilePanel.add(new JLabel("Following:"));
@@ -54,14 +59,18 @@ public class ResearcherProfileFrame extends JFrame {
         profilePanel.add(new JScrollPane(readingLists));
 
         mainPanel.add(profilePanel, BorderLayout.CENTER);
-        mainPanel.add(btnLookDetails, BorderLayout.SOUTH);
+
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        buttonPanel.add(btnLookDetails);
+        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
         setContentPane(mainPanel);
-        pack();
+        setSize(1000, 600);
         setLocationRelativeTo(null); // center the frame
 
         // Add component listener for responsive behavior
         addComponentListener(new java.awt.event.ComponentAdapter() {
+            @Override
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 adjustListSize();
             }

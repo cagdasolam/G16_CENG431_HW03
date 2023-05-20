@@ -13,22 +13,24 @@ public class PaperDetailController {
     private PaperDetailFrame view;
     private Paper paper;
     private ReadingListController readingListController;
+    private Researcher researcher;
     
 
     public PaperDetailController(Paper paper, Researcher researcher) {
         view = new PaperDetailFrame();
         this.paper = paper;
         this.readingListController = new ReadingListController();
-        showPaperDetail(researcher);
+        this.researcher = researcher;
+        showPaperDetail();
     }
 
-    public void showPaperDetail(Researcher researcher) {
+    public void showPaperDetail() {
         view.displayPaperDetails(paper);
 
         // Populate the reading list combo box
         List<ReadingList> readingLists = readingListController.findReadingListByUserName(researcher.getName());
         for (ReadingList readingList : readingLists) {
-            view.getReadingListComboBox().addItem(readingList.getReadingListName());
+            view.getReadingListComboBox().addItem(readingList);
         }
 
         view.getBtnDownload().addActionListener(new ActionListener() {
@@ -56,7 +58,7 @@ public class PaperDetailController {
     }
 
     private void addToReadingList(ReadingList readingList, Paper paper) {
-    	readingListController.addPaperToReadingList(readingList.getReadingListName(), paper.getTitle());
+    	readingListController.addPaperToReadingList(readingList.getReadingListName(), paper.getTitle(), researcher);
     }
 }
 

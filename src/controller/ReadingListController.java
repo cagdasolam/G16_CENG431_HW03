@@ -53,9 +53,9 @@ public class ReadingListController {
 		return true;
 	}
 
-	public boolean addPaperToReadingList(String readingListName, String paperName) {
+	public boolean addPaperToReadingList(String readingListName, String paperName, Researcher researcher) {
 
-		ReadingList updatedReadingList = findByReadingListName(readingListName);
+		ReadingList updatedReadingList = findByReadingListName(readingListName, researcher);
 
 		if (updatedReadingList != null) {
 			if (!isPaperInList(paperName, updatedReadingList.getNameOfPapers())){
@@ -91,9 +91,10 @@ public class ReadingListController {
 				.noneMatch(readingList -> readingList.getReadingListName().equals(newListName));
 	}
 
-	public ReadingList findByReadingListName(String readingListName) {
+	public ReadingList findByReadingListName(String readingListName, Researcher researcher) {
 		return readingLists.stream()
 				.filter(readingList -> readingList.getReadingListName().equals(readingListName))
+				.filter(readingList -> readingList.getCreatorResearcherName().equals(researcher.getName()))
 				.findFirst().orElse(null);
 	}
 

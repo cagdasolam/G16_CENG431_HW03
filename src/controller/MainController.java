@@ -1,7 +1,5 @@
 package controller;
 
-import java.util.List;
-
 import model.Paper;
 import model.Researcher;
 import parser.CsvParser;
@@ -13,37 +11,30 @@ import java.util.List;
 public class MainController {
     private MainFrame mainFrame;
     private Researcher researcher; // the currently logged-in researcher
-    private XmlParser xmlParser;
     private List<Researcher> researchers;
     private List<Paper> papers;
+    private  ResearcherController researcherController;
 
     public MainController(Researcher researcher) {
         this.mainFrame = new MainFrame(researcher);
         this.researcher = researcher;
-        this.xmlParser = new XmlParser();
-        this.researchers = xmlParser.getResearchersFromXml();
+        this.researcherController = new ResearcherController();
+        this.researchers = researcherController.getResearchers();
         this.papers = new CsvParser().getPapers("papersCsv.csv");
         
         initController();
-
         mainFrame.setVisible(true);
     }
     
     private void initController() {
-        mainFrame.getBtnViewProfile().addActionListener(e -> openProfile(researcher));
+        mainFrame.getBtnViewProfile().addActionListener(e -> openProfile());
         mainFrame.getBtnViewReadingLists().addActionListener(e -> openReadingLists());
         mainFrame.getBtnViewPapers().addActionListener(e -> openPapers());
         mainFrame.getBtnViewResearchers().addActionListener(e -> openResearchers());
     }
 
-    private void openProfile(Researcher researcher) {
-    	
-        for (Researcher r : researchers) {
-            if (r.getName().equals(researcher.getName())) {
-                new ResearcherProfileController(r); 
-                break;
-            }
-        }
+    private void openProfile() {
+        new ResearcherProfileController(researcher);
     }
 
     private void openReadingLists() {
@@ -55,7 +46,7 @@ public class MainController {
     }
 
     private void openResearchers() {
-        // Open researchers view here
+        new ResearcherListController(researchers);
     }
 }
 

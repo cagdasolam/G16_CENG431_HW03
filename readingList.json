@@ -1,16 +1,12 @@
 [
   {
     "readingListId": 1,
-    "creatorResearcherName": "researcher",
+    "creatorResearcherName": "Tuğkan Tuğlular",
     "readingListName": "ReadingList",
     "numberOfPapers": 6,
     "nameOfPapers": [
-      "newPaper",
-      "newPaper2",
-      "newPaper3",
-      "newPaper4",
-      "newPaper5",
-      "newPaper6"
+      "Test-Driven Modeling for Model-Driven Development",
+      "A Successful Application of a Test-Driven Development Strategy in the Industrial Environment"
     ]
   },
   {
@@ -26,19 +22,22 @@
     "readingListId": 3,
     "creatorResearcherName": "researcher",
     "readingListName": "ReadingList3",
-    "numberOfPapers": 1,
+    "numberOfPapers": 3,
     "nameOfPapers": [
-      "newPaper"
+      "newPaper",
+      "Introducing Test Automation and Test-Driven Development",
+      "A Formally Verified Compiler Back-End"
     ]
   },
   {
     "readingListId": 4,
     "creatorResearcherName": "asd",
     "readingListName": "ReadingList3",
-    "numberOfPapers": 1,
+    "numberOfPapers": 3,
     "nameOfPapers": [
       "Test-Driven Modeling for Model-Driven Development",
-      "A Successful Application of a Test-Driven Development Strategy in the Industrial Environment"
+      "A Successful Application of a Test-Driven Development Strategy in the Industrial Environment",
+      "A Formally Verified Compiler Back-End"
     ]
   }
 ]

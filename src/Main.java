@@ -38,7 +38,7 @@ public class Main {
 
 		System.out.println(readingListController.createNewReadingList(researcher, "ReadingList3"));
 
-		System.out.println(readingListController.addPaperToReadingList("ReadingList3", "newPaper"));
+//		System.out.println(readingListController.addPaperToReadingList("ReadingList3", "newPaper"));
 
 		paperController.downloadPaper(papers.get(0));
 		paperController.downloadPaper(papers.get(14));
