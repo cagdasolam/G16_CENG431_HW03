@@ -8,6 +8,7 @@ import view.ResearcherProfileFrame;
 public class ResearcherProfileController {
     private ResearcherProfileFrame researcherProfileFrame;
     private Researcher researcher;
+    private ReadingListController readingListController;
 
     public ResearcherProfileController(Researcher researcher) {
         this.researcherProfileFrame = new ResearcherProfileFrame();
@@ -22,5 +23,7 @@ public class ResearcherProfileController {
         researcherProfileFrame.setFollowing(researcher.getFollowingResearcherNames());
         researcherProfileFrame.setFollowers(researcher.getFollowerResearcherNames());
     }
+
+
 }
 

@@ -16,15 +16,22 @@ import java.util.List;
 public class ReadingListController {
 
 	JsonParser jsonParser = new JsonParser();
+	List<ReadingList> readingLists;
+	File jsonFile ;
+
+
+	public ReadingListController() {
+		this.jsonFile = new File("readingList.json");
+		this.readingLists = readExistingReadingLists();
+	}
 
 	public boolean createNewReadingList(Researcher researcher, String readingListName) {
-		File jsonFile = new File("readingList.json");
 
-		List<ReadingList> existingReadingLists = readExistingReadingLists(jsonFile);
+		List<ReadingList> existingReadingLists = readExistingReadingLists();
 
 		int id = existingReadingLists.stream().mapToInt(ReadingList::getReadingListId).max().orElse(0) + 1;
 
-		if (!isNameUnique(readingListName, existingReadingLists)) {
+		if (!isNameUnique(readingListName)) {
 			System.out.println("Name is not unique");
 			return false;
 		}
@@ -39,11 +46,8 @@ public class ReadingListController {
 	}
 
 	public boolean addPaperToReadingList(String readingListName, String paperName) {
-		File jsonFile = new File("readingList.json");
 
-		List<ReadingList> existingReadingLists = readExistingReadingLists(jsonFile);
-
-		ReadingList updatedReadingList = findByReadingListName(readingListName, existingReadingLists);
+		ReadingList updatedReadingList = findByReadingListName(readingListName);
 
 		if (updatedReadingList != null) {
 			if (!isPaperInList(paperName, updatedReadingList.getNameOfPapers())){
@@ -57,10 +61,10 @@ public class ReadingListController {
 			return false;
 		}
 
-		return jsonParser.updateJsonFile(jsonFile, existingReadingLists);
+		return jsonParser.updateJsonFile(jsonFile, readingLists);
 	}
 
-	private List<ReadingList> readExistingReadingLists(File jsonFile) {
+	private List<ReadingList> readExistingReadingLists() {
 		List<ReadingList> existingReadingLists = new ArrayList<>();
 
 		try (FileReader reader = new FileReader(jsonFile)) {
@@ -74,17 +78,20 @@ public class ReadingListController {
 		return existingReadingLists;
 	}
 
-	private boolean isNameUnique(String newListName, List<ReadingList> readingLists) {
+	private boolean isNameUnique(String newListName) {
 		return readingLists.stream()
 				.noneMatch(readingList -> readingList.getReadingListName().equals(newListName));
 	}
 
-//	public List<ReadingList> getAllReadingList()
-
-	public ReadingList findByReadingListName(String readingListName, List<ReadingList> readingLists) {
+	public ReadingList findByReadingListName(String readingListName) {
 		return readingLists.stream()
 				.filter(readingList -> readingList.getReadingListName().equals(readingListName))
 				.findFirst().orElse(null);
+	}
+
+	public List<ReadingList> findReadingListByUserName(String userName) {
+		return readingLists.stream()
+				.filter(readingList -> readingList.getCreatorResearcherName().equals(userName)).toList();
 	}
 
 	private boolean isPaperInList(String paperName, List<String> papers){

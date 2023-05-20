@@ -11,6 +11,17 @@
 		</follower_researcher_names>
 	</researcher>
 	<researcher>
+	<researcher_name>asd</researcher_name>
+	<password>asd</password>
+	<following_researcher_names>
+		<name>Dilek Öztürk</name>
+	</following_researcher_names>
+	<follower_researcher_names>
+		<name>Dilek Öztürk</name>
+		<name>Serhat Caner</name>
+	</follower_researcher_names>
+</researcher>
+	<researcher>
 		<researcher_name>Dilek Öztürk</researcher_name>
 		<password>password123</password>
 		<following_researcher_names>
@@ -29,7 +40,7 @@
 			<name>Tuğkan Tuğlular</name>
 			<name>Dilek Öztürk</name>
 		</following_researcher_names>
-	</researcher>
+	<follower_researcher_names/></researcher>
 	<researcher>
 		<researcher_name>Çağdaş Olam</researcher_name>
 		<password>password123</password>
