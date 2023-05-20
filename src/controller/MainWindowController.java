@@ -12,7 +12,8 @@ public class MainWindowController {
     private LoginFrame loginFrame;
     private ResearcherController researcherController;
 
-    public MainWindowController() {
+
+    public MainWindowController(CsvParser csvParser, XmlParser xmlParser) {
         this.mainWindow = new MainWindow();
         this.loginFrame = new LoginFrame();
         this.researcherController = new ResearcherController();
@@ -31,7 +32,6 @@ public class MainWindowController {
     }
 
     private void openPaperList() {
-    	CsvParser csvParser = new CsvParser();
         new PaperListController(csvParser.getPapers("papersCsv.csv"));
     }
 

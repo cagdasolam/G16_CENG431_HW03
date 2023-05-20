@@ -5,8 +5,6 @@ import javax.swing.*;
 import model.Researcher;
 import parser.XmlParser;
 import view.LoginFrame;
-import view.MainFrame;
-import view.ResearcherProfileFrame;
 
 import java.util.List;
 
@@ -35,7 +33,10 @@ public class LoginController {
                 // If we reached here, it means the credentials were invalid
                 JOptionPane.showMessageDialog(loginFrame, "Invalid Username/Password.");
             }
+
         });
+        
+        loginFrame.setVisible(true);
     }
 }
 
