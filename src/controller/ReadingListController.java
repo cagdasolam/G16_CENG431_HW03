@@ -47,6 +47,7 @@ public class ReadingListController {
 		ReadingList createdReadingList = new ReadingList(id, researcher.getName(), readingListName, 0, new ArrayList<>());
 
 		existingReadingLists.add(createdReadingList);
+		readingLists.add(createdReadingList);
 
 		jsonParser.updateJsonFile(jsonFile, existingReadingLists);
 

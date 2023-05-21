@@ -27,7 +27,7 @@ public class MainController {
     
     private void initController() {
         mainFrame.getBtnViewProfile().addActionListener(e -> openProfile());
-        mainFrame.getBtnViewReadingLists().addActionListener(e -> openReadingLists());
+        mainFrame.getCreateNewReadingList().addActionListener(e -> createNewReadingList());
         mainFrame.getBtnViewPapers().addActionListener(e -> openPapers());
         mainFrame.getBtnViewResearchers().addActionListener(e -> openResearchers());
     }
@@ -36,8 +36,8 @@ public class MainController {
         new ResearcherProfileController(loggedResearcher, loggedResearcher);
     }
 
-    private void openReadingLists() {
-        // Open reading list view here
+    private void createNewReadingList() {
+        new CreateReadingListController(researcher, papers);
     }
 
     private void openPapers() {

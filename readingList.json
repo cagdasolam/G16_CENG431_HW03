@@ -33,13 +33,34 @@
     "readingListId": 4,
     "creatorResearcherName": "asd",
     "readingListName": "ReadingList3",
-    "numberOfPapers": 5,
+    "numberOfPapers": 6,
     "nameOfPapers": [
       "Test-Driven Modeling for Model-Driven Development",
       "A Successful Application of a Test-Driven Development Strategy in the Industrial Environment",
       "A Formally Verified Compiler Back-End",
       "Test Driven Development: The State of the Practice",
-      "On the Effectiveness of Unit Tests in Test-Driven Development"
+      "An Initial Investigation of Test Driven Development in Industry",
+      "Learning Test-Driven Development by Counting Lines"
+    ]
+  },
+  {
+    "readingListId": 5,
+    "creatorResearcherName": "asd",
+    "readingListName": "readinglist1",
+    "numberOfPapers": 1,
+    "nameOfPapers": [
+      "Test-Driven Modeling for Model-Driven Development"
+    ]
+  },
+  {
+    "readingListId": 6,
+    "creatorResearcherName": "asd",
+    "readingListName": "readinglist2",
+    "numberOfPapers": 3,
+    "nameOfPapers": [
+      "Test-Driven Modeling for Model-Driven Development",
+      "Introducing Test Automation and Test-Driven Development",
+      "On the Effectiveness of the Test-First Approach to Programming"
     ]
   }
 ]
