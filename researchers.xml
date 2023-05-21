@@ -3,49 +3,45 @@
 		<researcher_name>Tuğkan Tuğlular</researcher_name>
 		<password>password123</password>
 		<following_researcher_names>
-			<name>Dilek Öztürk</name>
 		</following_researcher_names>
 		<follower_researcher_names>
+		<name>asd</name></follower_researcher_names>
+	</researcher>
+	<researcher>
+		<researcher_name>asd</researcher_name>
+		<password>asd</password>
+		<following_researcher_names>
 			<name>Dilek Öztürk</name>
+		<name>Tuğkan Tuğlular</name></following_researcher_names>
+		<follower_researcher_names>
 			<name>Serhat Caner</name>
 		</follower_researcher_names>
 	</researcher>
 	<researcher>
-	<researcher_name>asd</researcher_name>
-	<password>asd</password>
-	<following_researcher_names>
-		<name>Dilek Öztürk</name>
-	</following_researcher_names>
-	<follower_researcher_names>
-		<name>Dilek Öztürk</name>
-		<name>Serhat Caner</name>
-	</follower_researcher_names>
-</researcher>
-	<researcher>
 		<researcher_name>Dilek Öztürk</researcher_name>
 		<password>password123</password>
 		<following_researcher_names>
-			<name>Tuğkan Tuğlular</name>
 		</following_researcher_names>
 		<follower_researcher_names>
 			<name>Çağdaş Olam</name>
 			<name>Can Yakar</name>
-			<name>Tuğkan Tuğlular</name>
+			<name>asd</name>
 		</follower_researcher_names>
 	</researcher>
 	<researcher>
 		<researcher_name>Serhat Caner</researcher_name>
 		<password>password123</password>
 		<following_researcher_names>
-			<name>Tuğkan Tuğlular</name>
 			<name>Dilek Öztürk</name>
+			<name>asd</name>
 		</following_researcher_names>
-	<follower_researcher_names/></researcher>
+		<follower_researcher_names>
+		</follower_researcher_names>
+	</researcher>
 	<researcher>
 		<researcher_name>Çağdaş Olam</researcher_name>
 		<password>password123</password>
 		<following_researcher_names>
-			<name>Tuğkan Tuğlular</name>
 			<name>Dilek Öztürk</name>
 			<name>Can Yakar</name>
 		</following_researcher_names>
@@ -57,7 +53,6 @@
 		<researcher_name>Can Yakar</researcher_name>
 		<password>password123</password>
 		<following_researcher_names>
-			<name>Tuğkan Tuğlular</name>
 			<name>Dilek Öztürk</name>
 			<name>Çağdaş Olam</name>
 		</following_researcher_names>
