@@ -19,6 +19,7 @@ public class MainWindowController {
         this.researcherController = new ResearcherController();
 
         mainWindow.getBtnLogin().addActionListener(e -> openLoginWindow());
+        mainWindow.getBtnExit().addActionListener(e -> exitProgram());
 
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainWindow.setSize(1000, 600);
@@ -26,9 +27,12 @@ public class MainWindowController {
         mainWindow.setVisible(true);
     }
 
+    private void exitProgram() {
+        mainWindow.dispose();
+    }
+
     private void openLoginWindow() {
         new LoginController(loginFrame, researcherController);
         mainWindow.dispose(); // close the main window
     }
 }
-
