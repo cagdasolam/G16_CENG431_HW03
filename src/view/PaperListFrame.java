@@ -4,8 +4,6 @@ import model.Paper;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.util.List;
 
 public class PaperListFrame extends JFrame {

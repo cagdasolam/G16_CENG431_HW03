@@ -32,9 +32,6 @@ public class PaperListController {
         List<String> paperNames = papers.stream().map(Paper::getTitle).collect(Collectors.toList());
         paperListFrame.setPapers(paperNames);
         paperListFrame.setVisible(true);
-
-
-
     }
 
     public PaperListController(ReadingList readingList, Researcher researcher) {

@@ -55,7 +55,7 @@ public class ResearcherProfileController {
 		ReadingList selectedReadingList = researcherProfileFrame.getReadingLists().getSelectedValue();
 
         if (selectedReadingList != null) {
-            new PaperListController(selectedReadingList.getReadingListName(), selectedReadingList.getPapers(), loggedResearcher);
+            new PaperListController(selectedReadingList, loggedResearcher);
         } else {
             JOptionPane.showMessageDialog(researcherProfileFrame, "Please select a reading list");
         }
