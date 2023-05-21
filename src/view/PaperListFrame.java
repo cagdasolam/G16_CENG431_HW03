@@ -1,7 +1,11 @@
 package view;
 
+import model.Paper;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.List;
 
 public class PaperListFrame extends JFrame {
@@ -59,4 +63,13 @@ public class PaperListFrame extends JFrame {
     public void setOwner(boolean isOwner) {
         btnRemovePaper.setVisible(isOwner);
     }
+
+    public void addPaper(Paper paper){
+        paperListModel.addElement(paper.getTitle());
+    }
+
+    public void removePaper(Paper paper){
+        paperListModel.removeElement(paper.getTitle());
+    }
+
 }

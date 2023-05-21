@@ -19,7 +19,6 @@ public class ReadingListController {
 	List<ReadingList> readingLists;
 	File jsonFile ;
 
-
 	public List<ReadingList> getReadingLists() {
 		return readingLists;
 	}
@@ -64,6 +63,24 @@ public class ReadingListController {
 				return false;
 			}
 			updatedReadingList.getNameOfPapers().add(paperName);
+			updatedReadingList.setNumberOfPapers(updatedReadingList.getNameOfPapers().size());
+		} else {
+			System.out.println("ReadingList not found!");
+			return false;
+		}
+
+		return jsonParser.updateJsonFile(jsonFile, readingLists);
+	}
+
+	public boolean removePaperFromReadIngList(String readingListName, String paperName, Researcher researcher){
+		ReadingList updatedReadingList = findByReadingListName(readingListName, researcher);
+
+		if (updatedReadingList != null) {
+			if (isPaperInList(paperName, updatedReadingList.getNameOfPapers())){
+				System.out.println("Paper already removed from list");
+				return false;
+			}
+			updatedReadingList.getNameOfPapers().remove(paperName);
 			updatedReadingList.setNumberOfPapers(updatedReadingList.getNameOfPapers().size());
 		} else {
 			System.out.println("ReadingList not found!");

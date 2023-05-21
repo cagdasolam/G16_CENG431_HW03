@@ -3,6 +3,7 @@ package view;
 import model.Paper;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.List;
 
 public class CreateReadingListFrame extends JFrame {
@@ -21,15 +22,26 @@ public class CreateReadingListFrame extends JFrame {
         readingListNameField = new JTextField();
         createButton = new JButton("Create Reading List");
 
-        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
-        add(new JLabel("Select Paper(s):"));
-        add(new JScrollPane(paperList));
-        add(new JLabel("Reading List Name:"));
-        add(readingListNameField);
-        add(createButton);
+        JPanel paperPanel = new JPanel(new BorderLayout());
+        paperPanel.add(new JLabel("Select Paper(s):"), BorderLayout.NORTH);
+        paperPanel.add(new JScrollPane(paperList), BorderLayout.CENTER);
 
-        pack();
+        JPanel namePanel = new JPanel(new BorderLayout());
+        JLabel nameLabel = new JLabel("Reading List Name: ");
+        namePanel.add(nameLabel, BorderLayout.WEST);
+        namePanel.add(new JScrollPane(readingListNameField), BorderLayout.CENTER);
+
+        mainPanel.add(paperPanel);
+        mainPanel.add(Box.createVerticalStrut(10));
+        mainPanel.add(namePanel);
+        mainPanel.add(Box.createVerticalStrut(10));
+        mainPanel.add(createButton);
+
+        setContentPane(mainPanel);
+        setSize(1000, 600);
         setLocationRelativeTo(null); // center the frame
     }
 
