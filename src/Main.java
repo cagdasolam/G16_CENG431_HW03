@@ -40,17 +40,19 @@ public class Main {
 
 //		System.out.println(readingListController.addPaperToReadingList("ReadingList3", "newPaper"));
 
-		paperController.downloadPaper(papers.get(0));
-		paperController.downloadPaper(papers.get(14));
-
 		List<Researcher> researchers = xmlParser.getResearchersFromXml();
 
 		System.out.println(researchers);
 
-		System.out.println(researcherController.followResearcher(researchers.get(0), researchers.get(3)));
-		System.out.println(researcherController.unFollowResearcher(researchers.get(0), researchers.get(3)));
+//		Researcher follower = researchers.get(0);
+//		Researcher followed = researchers.get(3);
+//
+//		System.out.println(follower.getName() + "follow etti" + followed.getName());
+//		researcherController.followResearcher(follower, followed);
+//		System.out.println();
+//		System.out.println(researcherController.unFollowResearcher(researchers.get(0), researchers.get(3)));
 		
-		new MainWindowController(csvParser, xmlParser);
+		new MainWindowController();
 
 	}
 }

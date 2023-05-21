@@ -5,44 +5,58 @@ import model.Researcher;
 import view.ResearcherProfileFrame;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class ResearcherProfileController {
-    private ResearcherProfileFrame researcherProfileFrame;
-    private Researcher researcher;
-    private ReadingListController readingListController;
+	private final ResearcherProfileFrame researcherProfileFrame;
+	private final Researcher selectedResearcher;
+	private final Researcher loggedResearcher;
+	private final ReadingListController readingListController;
+	ResearcherController researcherController;
 
-    public ResearcherProfileController(Researcher researcher) {
-        this.researcherProfileFrame = new ResearcherProfileFrame();
-        this.researcher = researcher;
-        this.readingListController = new ReadingListController();
+	public ResearcherProfileController(Researcher loggedResearcher, Researcher selectedResearcher) {
+		this.researcherProfileFrame = new ResearcherProfileFrame();
+		this.selectedResearcher = selectedResearcher;
+		this.readingListController = new ReadingListController();
+		this.loggedResearcher = loggedResearcher;
+		this.researcherController = new ResearcherController();
 
-        loadResearcherProfile(researcher);
-        researcherProfileFrame.getBtnLookDetails().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                showReadingListDetails();
-            }
-        });
-        researcherProfileFrame.setVisible(true);
-    }
+		loadResearcherProfile(loggedResearcher, selectedResearcher, researcherProfileFrame);
+		researcherProfileFrame.getBtnLookReadingListDetails().addActionListener(
+				e -> showReadingListDetails());
+		researcherProfileFrame.getBtnFollow().addActionListener(
+				e -> {
+					researcherController.followResearcher(loggedResearcher, selectedResearcher);
+					researcherProfileFrame.addFollowing(selectedResearcher.getName());
+				});
+		researcherProfileFrame.getBtnUnFollow().addActionListener(
+				e -> {
+					researcherController.unFollowResearcher(loggedResearcher, selectedResearcher);
+					researcherProfileFrame.removeFollowing(selectedResearcher.getName());
+				});
 
-    private void loadResearcherProfile(Researcher researcher) {
-        researcherProfileFrame.setName(researcher.getName());
-        researcherProfileFrame.setFollowing(researcher.getFollowingResearcherNames());
-        researcherProfileFrame.setFollowers(researcher.getFollowerResearcherNames());
-        researcherProfileFrame.setReadingLists(readingListController.findReadingListByUserName(researcher.getName()));
-    }
-    
-    private void showReadingListDetails() {
-        ReadingList selectedReadingList =  researcherProfileFrame.getReadingLists().getSelectedValue();
+		researcherProfileFrame.setVisible(true);
+	}
 
-        if (selectedReadingList != null) {
-            new PaperListController(selectedReadingList.getPapers(), researcher);
-        } else {
-            JOptionPane.showMessageDialog(researcherProfileFrame, "Please select a reading list");
-        }
-    }
+	private void loadResearcherProfile(Researcher loggedResearcher, Researcher selectedResearcher, ResearcherProfileFrame frame) {
+		if (loggedResearcher.getName().equals(selectedResearcher.getName())){
+			frame.getBtnFollow().setVisible(false);
+			frame.getBtnUnFollow().setVisible(false);
+		}
+
+		frame.setName(selectedResearcher.getName());
+		frame.setFollowing(selectedResearcher.getFollowingResearcherNames());
+		frame.setFollowers(selectedResearcher.getFollowerResearcherNames());
+		frame.setReadingLists(readingListController.findReadingListByUserName(selectedResearcher.getName()));
+	}
+
+	private void showReadingListDetails() {
+		ReadingList selectedReadingList = researcherProfileFrame.getReadingLists().getSelectedValue();
+
+		if (selectedReadingList != null) {
+			new PaperListController(selectedReadingList.getPapers(), selectedResearcher);
+		} else {
+			JOptionPane.showMessageDialog(researcherProfileFrame, "Please select a reading list");
+		}
+	}
 }
 

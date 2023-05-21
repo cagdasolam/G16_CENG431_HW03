@@ -13,7 +13,7 @@ public class MainWindowController {
     private ResearcherController researcherController;
 
 
-    public MainWindowController(CsvParser csvParser, XmlParser xmlParser) {
+    public MainWindowController() {
         this.mainWindow = new MainWindow();
         this.loginFrame = new LoginFrame();
         this.researcherController = new ResearcherController();
@@ -29,10 +29,6 @@ public class MainWindowController {
     private void openLoginWindow() {
         new LoginController(loginFrame, researcherController);
         mainWindow.dispose(); // close the main window
-    }
-
-    private void openResearcherList() {
-        new ResearcherListController(researcherController.getResearchers());
     }
 }
 

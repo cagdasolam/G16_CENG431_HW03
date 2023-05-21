@@ -1,15 +1,10 @@
 package view;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 
-import controller.ResearcherProfileController;
 import model.ReadingList;
-import model.Researcher;
 
-import java.awt.*;
-import java.util.List;
-
-import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
@@ -22,7 +17,9 @@ public class ResearcherProfileFrame extends JFrame {
     private final JList<String> followersList;
     private final JList<String> followingList;
 
-    private final JButton btnLookDetails;
+    private final JButton btnLookReadingListDetails;
+    private final JButton btnFollow;
+    private final JButton btnUnFollow;
 
     public ResearcherProfileFrame() {
         super("Researcher Profile");
@@ -38,14 +35,22 @@ public class ResearcherProfileFrame extends JFrame {
         readingLists = new JList<>(readingListsModel);
         readingLists.setCellRenderer(new ReadingListRenderer());
 
-        btnLookDetails = new JButton("Look Details");
-        btnLookDetails.setPreferredSize(new Dimension(120, btnLookDetails.getPreferredSize().height));
+        btnLookReadingListDetails = new JButton("Look Details");
+        btnFollow = new JButton("Follow");
+        btnUnFollow = new JButton("Unfollow");
+        btnLookReadingListDetails.setPreferredSize(new Dimension(120, btnLookReadingListDetails.getPreferredSize().height));
+        btnFollow.setPreferredSize(new Dimension(120, btnFollow.getPreferredSize().height));
+        btnUnFollow.setPreferredSize(new Dimension(120, btnUnFollow.getPreferredSize().height));
 
         JPanel mainPanel = new JPanel(new BorderLayout());
-        JPanel profilePanel = new JPanel();
+        JPanel profilePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         profilePanel.setLayout(new BoxLayout(profilePanel, BoxLayout.Y_AXIS));
 
         JLabel nameLabel = new JLabel("Researcher Name:");
+        nameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        Border border = BorderFactory.createLineBorder(Color.RED, 1);
+        nameLabel.setBorder(border);
+        profilePanel.setBorder(border);
         profilePanel.add(nameLabel);
         profilePanel.add(lblName);
         profilePanel.add(Box.createVerticalStrut(10));
@@ -60,9 +65,15 @@ public class ResearcherProfileFrame extends JFrame {
 
         mainPanel.add(profilePanel, BorderLayout.CENTER);
 
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        buttonPanel.add(btnLookDetails);
-        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+        JPanel readingListButtonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        JPanel followButtonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+
+
+        readingListButtonPanel.add(btnLookReadingListDetails);
+        followButtonPanel.add(btnFollow);
+        followButtonPanel.add(btnUnFollow);
+        mainPanel.add(readingListButtonPanel, BorderLayout.SOUTH);
+        mainPanel.add(followButtonPanel, BorderLayout.NORTH);
 
         setContentPane(mainPanel);
         setSize(1000, 600);
@@ -102,9 +113,18 @@ public class ResearcherProfileFrame extends JFrame {
         }
     }
 
-    public JButton getBtnLookDetails() {
-        return btnLookDetails;
+    public JButton getBtnLookReadingListDetails() {
+        return btnLookReadingListDetails;
     }
+
+    public JButton getBtnFollow() {
+        return btnFollow;
+    }
+
+    public JButton getBtnUnFollow() {
+        return btnUnFollow;
+    }
+
 
     public JList<ReadingList> getReadingLists() {
         return readingLists;
@@ -120,6 +140,14 @@ public class ResearcherProfileFrame extends JFrame {
 
         revalidate();
         repaint();
+    }
+
+    public void addFollowing(String name) {
+        followingListModel.addElement(name);
+    }
+
+    public void removeFollowing(String name) {
+        followingListModel.removeElement(name);
     }
 
     private static class ReadingListRenderer extends DefaultListCellRenderer {

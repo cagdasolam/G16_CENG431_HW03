@@ -33,12 +33,13 @@
     "readingListId": 4,
     "creatorResearcherName": "asd",
     "readingListName": "ReadingList3",
-    "numberOfPapers": 4,
+    "numberOfPapers": 5,
     "nameOfPapers": [
       "Test-Driven Modeling for Model-Driven Development",
       "A Successful Application of a Test-Driven Development Strategy in the Industrial Environment",
       "A Formally Verified Compiler Back-End",
-      "Test Driven Development: The State of the Practice"
+      "Test Driven Development: The State of the Practice",
+      "On the Effectiveness of Unit Tests in Test-Driven Development"
     ]
   }
 ]

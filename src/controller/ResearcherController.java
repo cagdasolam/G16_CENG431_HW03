@@ -25,10 +25,14 @@ public class ResearcherController {
 	}
 
 	public boolean followResearcher(Researcher follower, Researcher followed){
+		follower.getFollowingResearcherNames().add(followed.getName());
+		followed.getFollowerResearcherNames().add(follower.getName());
 		return xmlParser.followResearcher(follower, followed);
 	}
 
 	public boolean unFollowResearcher(Researcher follower, Researcher followed){
+		follower.getFollowingResearcherNames().remove(followed.getName());
+		followed.getFollowerResearcherNames().remove(follower.getName());
 		return xmlParser.unfollowResearcher(follower, followed);
 	}
 }
