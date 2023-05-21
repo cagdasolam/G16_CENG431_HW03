@@ -26,13 +26,14 @@ public class ResearcherProfileController {
 		researcherProfileFrame.getBtnFollow().addActionListener(
 				e -> {
 					researcherController.followResearcher(loggedResearcher, selectedResearcher);
-					researcherProfileFrame.addFollowing(selectedResearcher.getName());
+					researcherProfileFrame.addFollower(loggedResearcher.getName());
 				});
 		researcherProfileFrame.getBtnUnFollow().addActionListener(
 				e -> {
 					researcherController.unFollowResearcher(loggedResearcher, selectedResearcher);
-					researcherProfileFrame.removeFollowing(selectedResearcher.getName());
+					researcherProfileFrame.removeFollowing(loggedResearcher.getName());
 				});
+
 
 		researcherProfileFrame.setVisible(true);
 	}
