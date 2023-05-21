@@ -116,6 +116,13 @@ public class ReadingListController {
 				.findFirst().orElse(null);
 	}
 
+	public ReadingList find(String readingListName, Researcher researcher) {
+		return readExistingReadingLists().stream()
+				.filter(readingList -> readingList.getReadingListName().equals(readingListName))
+				.filter(readingList -> readingList.getCreatorResearcherName().equals(researcher.getName()))
+				.findFirst().orElse(null);
+	}
+
 	public List<ReadingList> findReadingListByUserName(String userName) {
 		return readingLists.stream()
 				.filter(readingList -> readingList.getCreatorResearcherName().equals(userName)).toList();

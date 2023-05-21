@@ -6,13 +6,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public class PaperListFrame extends JFrame {
+public class ReadingListFrame extends JFrame {
     private DefaultListModel<String> paperListModel;
     private JList<String> paperList;
     private JButton btnViewDetails;
     private JButton btnRemovePaper;
 
-    public PaperListFrame(String readingListName) {
+    public ReadingListFrame(String readingListName) {
         super(readingListName);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 

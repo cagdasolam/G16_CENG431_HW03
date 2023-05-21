@@ -1,5 +1,6 @@
-package controller;
+package observer;
 
+import controller.ReadingListController;
 import model.Paper;
 import model.ReadingList;
 import model.Researcher;
@@ -10,13 +11,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class CreateReadingListController {
+public class CreateReadingListFrameObserver {
     private CreateReadingListFrame view;
     private Researcher researcher;
     private List<Paper> papers;
     private ReadingListController readinglistController;
 
-    public CreateReadingListController(Researcher researcher, List<Paper> papers) {
+    public CreateReadingListFrameObserver(Researcher researcher, List<Paper> papers) {
         this.researcher = researcher;
         this.papers = papers;
         this.view = new CreateReadingListFrame();
@@ -58,15 +59,5 @@ public class CreateReadingListController {
         }
         JOptionPane.showMessageDialog(view, "New reading list is created! : " + newReadingListName);
         view.dispose();
-
-        /*ReadingList newReadingList = new ReadingList(readingListName);
-        for (Paper paper : papers) {
-            if (selectedPaperTitles.contains(paper.getTitle())) {
-                newReadingList.addPaper(paper);
-            }
-        }
-
-        researcher.addReadingList(newReadingList);
-        view.dispose(); // close the window*/
     }
 }

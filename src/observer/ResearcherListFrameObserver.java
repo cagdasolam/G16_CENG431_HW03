@@ -1,26 +1,24 @@
-package controller;
+package observer;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import model.ReadingList;
 import model.Researcher;
 import view.ResearcherListFrame;
 import view.ResearcherProfileFrame;
 
 import javax.swing.*;
 
-public class ResearcherListController {
+public class ResearcherListFrameObserver {
     private ResearcherListFrame researcherListFrame;
     private List<Researcher> researchers;
-    private ResearcherProfileController researcherProfileController;
+    private ResearcherProfileFrameObserver researcherProfileController;
     private ResearcherProfileFrame researcherProfileFrame;
     private Researcher loggedResearcher;
 
 
-    public ResearcherListController(List<Researcher> researchers, Researcher loggedResearcher) {
+    public ResearcherListFrameObserver(List<Researcher> researchers, Researcher loggedResearcher) {
         this.researcherProfileFrame = new ResearcherProfileFrame();
         this.researcherListFrame = new ResearcherListFrame();
         this.researchers = researchers;
@@ -41,7 +39,7 @@ public class ResearcherListController {
     }
 
     private void openResearcherProfile(Researcher loggedResearcher, Researcher selectedResearcher) {
-        new ResearcherProfileController(loggedResearcher, selectedResearcher);
+        new ResearcherProfileFrameObserver(loggedResearcher, selectedResearcher);
     }
 
     private void showResearcherList() {

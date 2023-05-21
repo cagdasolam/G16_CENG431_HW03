@@ -1,25 +1,27 @@
-package controller;
+package observer;
 
+import controller.ResearcherController;
+import generator.PaperGenerator;
 import model.Paper;
 import model.Researcher;
-import parser.CsvParser;
 import view.MainFrame;
 
+import java.io.IOException;
 import java.util.List;
 
-public class MainController {
+public class MainFrameObserver {
     private MainFrame mainFrame;
     private Researcher loggedResearcher; // the currently logged-in researcher
     private List<Researcher> researchers;
     private List<Paper> papers;
-    private  ResearcherController researcherController;
+    private ResearcherController researcherController;
 
-    public MainController(Researcher loggedResearcher) {
+    public MainFrameObserver(Researcher loggedResearcher) throws IOException {
         this.mainFrame = new MainFrame(loggedResearcher);
         this.loggedResearcher = loggedResearcher;
         this.researcherController = new ResearcherController();
         this.researchers = researcherController.getResearchers();
-        this.papers = new CsvParser().getPapers("papersCsv.csv");
+        this.papers = new PaperGenerator().getPapersFromCsv();
         
         initController();
         mainFrame.setVisible(true);
@@ -33,21 +35,21 @@ public class MainController {
     }
 
     private void openProfile() {
-        new ResearcherProfileController(loggedResearcher, loggedResearcher);
+        new ResearcherProfileFrameObserver(loggedResearcher, loggedResearcher);
     }
 
     private void createNewReadingList() {
-        new CreateReadingListController(loggedResearcher, papers);
+        new CreateReadingListFrameObserver(loggedResearcher, papers);
     }
 
     private void openPapers() {
 
-        new PaperListController("All Papers", papers, loggedResearcher);
+        new ReadingListFrameObserver("All Papers", papers, loggedResearcher);
 
     }
 
     private void openResearchers() {
-        new ResearcherListController(researchers, loggedResearcher);
+        new ResearcherListFrameObserver(researchers, loggedResearcher);
     }
 }
 

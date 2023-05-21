@@ -1,25 +1,26 @@
-package controller;
+package observer;
 
+import controller.ReadingListController;
 import model.Paper;
 import model.ReadingList;
 import model.Researcher;
-import view.PaperListFrame;
+import view.ReadingListFrame;
 
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PaperListController {
-    private PaperListFrame paperListFrame;
+public class ReadingListFrameObserver {
+    private ReadingListFrame paperListFrame;
     private List<Paper> papers;
     private Researcher researcher;
     private ReadingListController readingListController;
     private String readingListName;
     private ReadingList readingList;
 
-    public PaperListController(String readingListName, List<Paper> papers, Researcher researcher) {
-        this.paperListFrame = new PaperListFrame(readingListName);
+    public ReadingListFrameObserver(String readingListName, List<Paper> papers, Researcher researcher) {
+        this.paperListFrame = new ReadingListFrame(readingListName);
         this.papers = new ArrayList<>(papers);
         this.researcher = researcher;
         this.readingListController = new ReadingListController();
@@ -34,9 +35,9 @@ public class PaperListController {
         paperListFrame.setVisible(true);
     }
 
-    public PaperListController(ReadingList readingList, Researcher researcher) {
+    public ReadingListFrameObserver(ReadingList readingList, Researcher researcher) {
         this.readingListName = readingList.getReadingListName();
-        this.paperListFrame = new PaperListFrame(readingListName);
+        this.paperListFrame = new ReadingListFrame(readingListName);
         this.readingList = readingList;
         this.papers = readingList.getPapers();
         this.researcher = researcher;
@@ -80,7 +81,6 @@ public class PaperListController {
             readingList.setNameOfPapers(paperNames);
 
             paperListFrame.removePaper(selectedPaper);
-
             readingListController.removePaperFromReadIngList(readingListName, selectedPaperTitle, researcher);
         } else {
             JOptionPane.showMessageDialog(paperListFrame, "Please select a paper");
@@ -92,7 +92,7 @@ public class PaperListController {
         Paper selectedPaper = findPaper(selectedPaperTitle);
 
         if (selectedPaper != null) {
-            new PaperDetailController(selectedPaper, researcher);
+            new PaperDetailFrameObserver(selectedPaper, researcher);
         } else {
             JOptionPane.showMessageDialog(paperListFrame, "Please select a paper");
         }
@@ -107,7 +107,7 @@ public class PaperListController {
         return null;
     }
 
-    public PaperListFrame getPaperListFrame() {
+    public ReadingListFrame getPaperListFrame() {
         return paperListFrame;
     }
 }

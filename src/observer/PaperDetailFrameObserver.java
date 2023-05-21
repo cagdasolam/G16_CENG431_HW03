@@ -1,5 +1,7 @@
-package controller;
+package observer;
 
+import controller.PaperController;
+import controller.ReadingListController;
 import model.Paper;
 import model.ReadingList;
 import model.Researcher;
@@ -10,14 +12,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class PaperDetailController {
+public class PaperDetailFrameObserver {
 	private PaperDetailFrame view;
 	private Paper paper;
 	private ReadingListController readingListController;
 	private Researcher researcher;
 
 
-	public PaperDetailController(Paper paper, Researcher researcher) {
+	public PaperDetailFrameObserver(Paper paper, Researcher researcher) {
 		view = new PaperDetailFrame();
 		this.paper = paper;
 		this.readingListController = new ReadingListController();

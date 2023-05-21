@@ -1,18 +1,18 @@
-package controller;
+package observer;
 
 import javax.swing.*;
 
+import controller.ResearcherController;
 import model.Researcher;
-import parser.XmlParser;
 import view.LoginFrame;
 
-import java.util.List;
+import java.io.IOException;
 
-public class LoginController {
+public class LoginFrameObserver {
     private LoginFrame loginFrame;
     private ResearcherController researcherController;
 
-    public LoginController(LoginFrame loginFrame, ResearcherController researcherController) {
+    public LoginFrameObserver(LoginFrame loginFrame, ResearcherController researcherController) {
         this.loginFrame = loginFrame;
         loginFrame.setVisible(true);
         this.researcherController = researcherController;
@@ -26,7 +26,13 @@ public class LoginController {
 
                 Researcher researcher = researcherController.getResearcher(enteredUsername);
                 // Launch the MainFrame
-                SwingUtilities.invokeLater(() -> new MainController(researcher));
+                SwingUtilities.invokeLater(() -> {
+                    try {
+                        new MainFrameObserver(researcher);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                });
                 loginFrame.dispose();
             }else {
                 // If we reached here, it means the credentials were invalid

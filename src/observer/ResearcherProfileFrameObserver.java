@@ -1,19 +1,21 @@
-package controller;
+package observer;
 
+import controller.ReadingListController;
+import controller.ResearcherController;
 import model.ReadingList;
 import model.Researcher;
 import view.ResearcherProfileFrame;
 
 import javax.swing.*;
 
-public class ResearcherProfileController {
+public class ResearcherProfileFrameObserver {
 	private final ResearcherProfileFrame researcherProfileFrame;
 	private final Researcher selectedResearcher;
 	private final Researcher loggedResearcher;
 	private final ReadingListController readingListController;
 	ResearcherController researcherController;
 
-	public ResearcherProfileController(Researcher loggedResearcher, Researcher selectedResearcher) {
+	public ResearcherProfileFrameObserver(Researcher loggedResearcher, Researcher selectedResearcher) {
 		this.researcherProfileFrame = new ResearcherProfileFrame();
 		this.selectedResearcher = selectedResearcher;
 		this.readingListController = new ReadingListController();
@@ -54,8 +56,10 @@ public class ResearcherProfileController {
 	private void showReadingListDetails() {
 		ReadingList selectedReadingList = researcherProfileFrame.getReadingLists().getSelectedValue();
 
+		ReadingList another = readingListController.find(selectedReadingList.getReadingListName(), loggedResearcher);
+
         if (selectedReadingList != null) {
-            new PaperListController(selectedReadingList, loggedResearcher);
+            new ReadingListFrameObserver(another, loggedResearcher);
         } else {
             JOptionPane.showMessageDialog(researcherProfileFrame, "Please select a reading list");
         }

@@ -1,19 +1,21 @@
-package controller;
+package observer;
 
-import parser.CsvParser;
-import parser.XmlParser;
+import controller.ResearcherController;
+import parser.JsonParser;
 import view.LoginFrame;
 import view.MainWindow;
 
 import javax.swing.*;
 
-public class MainWindowController {
+public class MainWindowObserver {
     private MainWindow mainWindow;
     private LoginFrame loginFrame;
     private ResearcherController researcherController;
 
 
-    public MainWindowController() {
+    public MainWindowObserver() {
+        JsonParser jsonParser = new JsonParser();
+        jsonParser.createJsonFile();
         this.mainWindow = new MainWindow();
         this.loginFrame = new LoginFrame();
         this.researcherController = new ResearcherController();
@@ -32,7 +34,7 @@ public class MainWindowController {
     }
 
     private void openLoginWindow() {
-        new LoginController(loginFrame, researcherController);
+        new LoginFrameObserver(loginFrame, researcherController);
         mainWindow.dispose(); // close the main window
     }
 }
