@@ -37,6 +37,7 @@ public class ResearcherProfileController {
 		researcherProfileFrame.setVisible(true);
 	}
 
+
 	private void loadResearcherProfile(Researcher loggedResearcher, Researcher selectedResearcher, ResearcherProfileFrame frame) {
 		if (loggedResearcher.getName().equals(selectedResearcher.getName())){
 			frame.getBtnFollow().setVisible(false);
@@ -52,11 +53,12 @@ public class ResearcherProfileController {
 	private void showReadingListDetails() {
 		ReadingList selectedReadingList = researcherProfileFrame.getReadingLists().getSelectedValue();
 
-		if (selectedReadingList != null) {
-			new PaperListController(selectedReadingList.getPapers(), selectedResearcher);
-		} else {
-			JOptionPane.showMessageDialog(researcherProfileFrame, "Please select a reading list");
-		}
-	}
+        if (selectedReadingList != null) {
+            new PaperListController(selectedReadingList.getReadingListName(), selectedReadingList.getPapers(), loggedResearcher);
+        } else {
+            JOptionPane.showMessageDialog(researcherProfileFrame, "Please select a reading list");
+        }
+    }
+
 }
 

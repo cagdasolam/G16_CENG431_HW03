@@ -37,11 +37,13 @@ public class MainController {
     }
 
     private void createNewReadingList() {
-        new CreateReadingListController(researcher, papers);
+        new CreateReadingListController(loggedResearcher, papers);
     }
 
     private void openPapers() {
-        new PaperListController(papers, loggedResearcher);
+
+        new PaperListController("All Papers", papers, loggedResearcher);
+
     }
 
     private void openResearchers() {
