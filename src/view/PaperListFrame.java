@@ -8,23 +8,29 @@ public class PaperListFrame extends JFrame {
     private DefaultListModel<String> paperListModel;
     private JList<String> paperList;
     private JButton btnViewDetails;
+    private JButton btnRemovePaper;
 
-    public PaperListFrame() {
-        super("Paper List");
+    public PaperListFrame(String readingListName) {
+        super(readingListName);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         paperListModel = new DefaultListModel<>();
         paperList = new JList<>(paperListModel);
         btnViewDetails = new JButton("View Details");
+        btnRemovePaper = new JButton("Remove Selected Paper");
 
         JPanel mainPanel = new JPanel(new BorderLayout());
         JPanel listPanel = new JPanel(new BorderLayout());
+        JPanel buttonPanel = new JPanel();
+
+        buttonPanel.add(btnViewDetails);
+        buttonPanel.add(btnRemovePaper);
 
         listPanel.add(new JLabel("Papers:"), BorderLayout.NORTH);
         listPanel.add(new JScrollPane(paperList), BorderLayout.CENTER);
 
         mainPanel.add(listPanel, BorderLayout.CENTER);
-        mainPanel.add(btnViewDetails, BorderLayout.SOUTH);
+        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
         setContentPane(mainPanel);
         setSize(1000, 600);
@@ -44,5 +50,13 @@ public class PaperListFrame extends JFrame {
 
     public JList<String> getPaperList() {
         return paperList;
+    }
+
+    public JButton getBtnRemovePaper() {
+        return btnRemovePaper;
+    }
+
+    public void setOwner(boolean isOwner) {
+        btnRemovePaper.setVisible(isOwner);
     }
 }
